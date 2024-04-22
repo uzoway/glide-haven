@@ -1,4 +1,4 @@
-# Cristina Gomez Exploration
+<!-- # Cristina Gomez Exploration
 
 Development of a conceptual animation for the personal website of independent photographer Cristina Gómez designed by [Alex Tkachev](https://twitter.com/simply_aalex) [here](https://twitter.com/simply_aalex/status/1764982370078278049/video/1). 
 
@@ -32,4 +32,4 @@ Feel free to review the code for a more detailed understanding of my approach, a
 
 ## Credit 
 
-Huge credits goes to [Alex Tkachev](https://twitter.com/simply_aalex)🙌 who created the original design and motion which I have coded.
+Huge credits goes to [Alex Tkachev](https://twitter.com/simply_aalex)🙌 who created the original design and motion which I have coded. -->
