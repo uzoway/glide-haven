@@ -109,6 +109,18 @@ li {
     overflow: hidden;
 }
 
+.wrapper::before {
+    content: "";
+    position: fixed;
+    top: 53vh;
+    left: 48.5%;
+    transform: translate(-50%, -50%);
+    width: 1.2vw;
+    aspect-ratio: 1/1;
+    background-color: var(--black);
+    clip-path: polygon(0 0, 0% 100%, 100% 50%);
+}
+
 .header {
     display: grid;
     grid-template-columns: repeat(12, minmax(0, 1fr));
@@ -171,20 +183,25 @@ li {
 
 .project__titles {
     position: absolute;
-    /* background-color: rgb(230, 217, 217); */
     left: calc(calc(var(--column-width) * 6) + calc(var(--gutter-width) * 7));
     top: 0;
     width: 100%;
     display: flex;
     flex-direction: column;
-    gap: 0.5vw;
+    gap: 1vw;
+    will-change: transform;
+    transition: all .55s ease;
+    padding-top: .5rem;
 }
 
-/* .project__titles .project__titles--item {
-    background-color: blue;
-} */
-
-.project__titles .project__titles--item p {
+.project__titles .project__titles--item span {
     font-size: clamp(1.875rem, 1.733rem + 0.7102vw, 2.5rem);
-    color: #00000091;
+    color: #00000052;
+    transition: .55s cubic-bezier(0.215, 0.610, 0.355, 1);
+    /* background-color: red; */
+    line-height: 1;
+}
+
+.project__titles .project__titles--item span.active {
+    color: #000000;
 }
