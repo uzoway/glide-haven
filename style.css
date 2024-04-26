@@ -152,6 +152,10 @@ li {
     left: calc(calc(var(--column-width) * 5) + calc(var(--gutter-width) * 6));
 }
 
+.scroll__text.move {
+    left: 30vw;
+}
+
 .video__container {
     position: absolute;
     left: 0;
@@ -163,23 +167,58 @@ li {
     gap: var(--gutter-width); 
 }
 
-.video__container .video__wrapper {
+.video__container .video__container--items {
     grid-column: span 3 / span 3;
     aspect-ratio: 16/10;
     overflow: hidden;
     position: relative;
-    background-color: rgb(228, 228, 241);
+    cursor: pointer;
 }
 
-.video__container .video__wrapper img {
+.video__container .video__container--items .video__wrapper {
+    position: absolute;
+    inset: 0; 
+}
+
+@keyframes slide-up {
+    0% {
+        transform: translateY(0%);
+    }
+
+    100% {
+        transform: translateY(-100%);
+    }
+}
+
+.video__container .video__container--items .video__wrapper video {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    position: absolute;
-    top: 0;
-    left: 0;
 }
 
+.video__container .video__container--items .video__container--toolkit {
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    z-index: 2;
+    background-color: #d8d5ba;
+    padding: .5rem .9rem .6rem;
+    border-radius: 1.5rem;
+    will-change: transform;
+}
+
+.video__container--toolkit .toolkit__content {
+    color: var(--black);
+    overflow: hidden;
+}
+
+.video__container--toolkit .toolkit__content span {
+    display: inline-block;
+    transform: translateY(100%);
+    will-change: transform;
+    font-size: 0.8rem;
+}
 
 .project__titles {
     position: absolute;
