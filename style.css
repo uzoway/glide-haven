@@ -152,6 +152,7 @@ li {
     left: calc(calc(var(--column-width) * 5) + calc(var(--gutter-width) * 6));
 }
 
+/* Remove after testing */
 .scroll__text.move {
     left: 30vw;
 }
@@ -165,6 +166,7 @@ li {
     display: grid;
     grid-template-columns: repeat(12, minmax(0, 1fr));
     gap: var(--gutter-width); 
+    will-change: transform;
 }
 
 .video__container .video__container--items {
@@ -173,6 +175,15 @@ li {
     overflow: hidden;
     position: relative;
     cursor: pointer;
+    will-change: transform;
+    height: auto;
+}
+
+.video__container .video__container--items.active {
+    grid-column: span 12 / span 12;
+    aspect-ratio: unset;
+    height: 90vh;
+    transform-origin: left bottom;
 }
 
 .video__container .video__container--items .video__wrapper {
@@ -203,21 +214,55 @@ li {
     transform: translate(-50%, -50%) scale(0);
     z-index: 2;
     background-color: #d8d5ba;
-    padding: .5rem .9rem .6rem;
+    padding: .3rem .9rem .4rem;
     border-radius: 1.5rem;
     will-change: transform;
 }
 
 .video__container--toolkit .toolkit__content {
-    color: var(--black);
     overflow: hidden;
 }
 
 .video__container--toolkit .toolkit__content span {
     display: inline-block;
+    color: var(--black);
     transform: translateY(100%);
     will-change: transform;
-    font-size: 0.8rem;
+    font-size: 0.9rem;
+}
+
+/* Close video button */
+.video__container .video__container--items .video__container--closeBtn {
+    border: 0;
+    outline: none;
+    position: absolute;
+    z-index: 1000;
+    top: 0;
+    right: 0;
+    margin: 1rem;
+    transform: scale(0);
+    z-index: 2;
+    background-color: #d8d5ba;
+    padding: .3rem .9rem .4rem;
+    border-radius: 1.5rem;
+    will-change: transform;
+    cursor: pointer;
+}
+
+.video__container .video__container--items .video__container--closeBtn:hover {
+    background-color: #dbd59b;
+}
+
+.video__container--closeBtn .closeBtn__content {
+    overflow: hidden;
+}
+
+.video__container--closeBtn .closeBtn__content span {
+    display: inline-block;
+    color: var(--black);
+    transform: translateY(100%);
+    will-change: transform;
+    font-size: 0.9rem;
 }
 
 .project__titles {
@@ -237,7 +282,6 @@ li {
     font-size: clamp(1.875rem, 1.733rem + 0.7102vw, 2.5rem);
     color: #00000052;
     transition: .55s cubic-bezier(0.215, 0.610, 0.355, 1);
-    /* background-color: red; */
     line-height: 1;
 }
 
