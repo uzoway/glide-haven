@@ -182,7 +182,7 @@ li {
 .video__container .video__container--items.active {
     grid-column: span 12 / span 12;
     aspect-ratio: unset;
-    height: 90vh;
+    height: 92vh;
     transform-origin: left bottom;
 }
 
@@ -209,7 +209,7 @@ li {
 
 .video__container .video__container--items .video__container--toolkit {
     position: absolute;
-    top: 60%;
+    top: 55%;
     left: 50%;
     transform: translate(-50%, -50%) scale(0);
     z-index: 2;
