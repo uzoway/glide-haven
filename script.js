@@ -219,8 +219,8 @@ function enlargeAndPlayCurrentVideo() {
     });
 
     Flip.from(currentVideoState, {
-        duration: 0.8,
-        ease: "ease-out-quad",
+        duration: 1.2,
+        ease: "ease-in-out-quart",
         absolute: true,
         onComplete: () => {
             closeVideoButtonTl.play();
@@ -257,8 +257,8 @@ function revertCurrentVideoSize(event) {
         videoItemsContainer.classList.toggle("active");
 
         Flip.from(newVideoState, {
-            duration: 0.8,
-            ease: "ease-out-quad",
+            duration: 1.2,
+            ease: "ease-in-out-quart",
             absolute: true,
             onComplete: () => {
                 fadeInAllExternalElementTl.play();
