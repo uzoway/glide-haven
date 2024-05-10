@@ -26,6 +26,8 @@ function initAnimation() {
     // Vertical scrolling of the project title
     let currentStep = 0;
     let lastScrollY = 0;
+
+    // const scrollTrigger = 10;
     
     const projectTitlesContainer = document.querySelector(".project__titles");
     
@@ -35,63 +37,10 @@ function initAnimation() {
         lastScrollY = Math.min(Math.max(lastScrollY, 0), maxScroll);
         
         // Check for enough scroll to trigger a step
-        if (Math.abs(lastScrollY - currentStep * 3.5) >= 3.5) {
-            currentStep += Math.sign(lastScrollY - currentStep * 3.5); // Update step based on scroll direction
+        if (Math.abs(lastScrollY - currentStep * 10) >= 10) {
+            currentStep += Math.sign(lastScrollY - currentStep * 10); // Update step based on scroll direction
         }
-
-
-
-        const videosContainer = document.querySelector(".videos");
-
-        if(Math.sign(lastScrollY - currentStep * 3.5) >= 1) {
-            console.log("positive 1")
-
-            let activeVideoContainer = document.querySelector(".video__wrapper:last-child");
-    
-            activeVideoContainer.style.animation = "slide-up 1.2s cubic-bezier(0.165,0.84,0.44,1) forwards";
-            activeVideoContainer.style.animationDelay = "0.5s";
-
-            setTimeout(() => {
-                activeVideoContainer.style.animation = "";
-
-                videosContainer.prepend(activeVideoContainer);
-            }, 1200);
-        }
-        else {
-            console.log("negative 1")
-
-            let lastActiveVideoContainer = document.querySelector(".video__wrapper:first-child");
-
-            lastActiveVideoContainer.style.transform = "translateY(-100%)";
-
-            setTimeout(() => {
-                videosContainer.appendChild(lastActiveVideoContainer);
-                setTimeout(() => {
-                    lastActiveVideoContainer.style.transition = "transform 1s cubic-bezier(0.165, 0.84, 0.44, 1)";
-                    lastActiveVideoContainer.style.transform = "translateY(0)";
-        
-                    setTimeout(() => {
-                        lastActiveVideoContainer.style.transition = "";
-                        lastActiveVideoContainer.style.transform = "";
-                    }, 1000);
-                }, 200);
-            }, 0);
-        }
-       
     });
-
-    // window.addEventListener("wheel", () => {
-    //     const translateYValue = parseFloat(getComputedStyle(projectTitlesContainer).transform.split(',')[5]);
-
-    //     // Check if the translation is positive (scrolling down)
-    //     if (translateYValue > 0) {
-    //         // Scrolling down logic here
-    //         console.log("Scrolling down");
-    //     } else {
-    //         // Scrolling up or not translated
-    //         console.log("Not scrolling down");
-    //     }
-    // })
 
 
     // Get the centered project title and update the color
@@ -104,7 +53,7 @@ function initAnimation() {
         for (let item of allTitles) {
             const rect = item.getBoundingClientRect();
             
-            if (rect.top >= window.innerHeight / 2.1) {
+            if (rect.top >= window.innerHeight / 2.1 && rect.top >= window.innerHeight / 2.15) {
                 if (currentCenteredProjectTitle !== item ) {
                     if (lastActiveProjectTitle) {
                         lastActiveProjectTitle.classList.remove("active");
@@ -120,7 +69,7 @@ function initAnimation() {
     }
     
     function animate() {
-        projectTitlesContainer.style.transform = `translateY(-${currentStep * 3.5}px)`;
+        projectTitlesContainer.style.transform = `translateY(-${currentStep * 5}px)`;
         checkAndUpdateCenteredProjectTitle();
         requestAnimationFrame(animate);
     }
@@ -150,43 +99,39 @@ playVideoButtonTl.set(".video__container .video__container--items .video__contai
     ease: "ease-out-quad"
 })
 
-
 videoItemsContainer.addEventListener("mouseenter", () => playVideoButtonTl.play())
 
 
-// const videosContainer = document.querySelector(".videos");
+const videosContainer = document.querySelector(".videos");
 
-// document.querySelector(".scroll__text").addEventListener("click", () => {
-//     let activeVideoContainer = document.querySelector(".video__wrapper:last-child");
+document.querySelector(".scroll__text").addEventListener("click", () => {
+    let activeVideoContainer = document.querySelector(".video__wrapper:last-child");
     
-//     activeVideoContainer.style.animation = "slide-up 1s cubic-bezier(0.165,0.84,0.44,1) forwards";
+    activeVideoContainer.style.animation = "slide-up 1s cubic-bezier(0.455,0.03,0.515,0.955) forwards";
 
-//     setTimeout(() => {
-//         activeVideoContainer.style.animation = "";
+    setTimeout(() => {
+        activeVideoContainer.style.animation = "";
 
-//         videosContainer.prepend(activeVideoContainer);
-//     }, 1000);
-// });
+        videosContainer.prepend(activeVideoContainer);
+    }, 1000);
+});
 
 
-// document.querySelector(".move").addEventListener("click", () => {
-//     let lastActiveVideoContainer = document.querySelector(".video__wrapper:first-child");
+document.querySelector(".move").addEventListener("click", () => {
+    const lastActiveVideoContainer = document.querySelector(".video__wrapper:first-child");
 
-//     lastActiveVideoContainer.style.transform = "translateY(-100%)";
-
-//     setTimeout(() => {
-//         videosContainer.appendChild(lastActiveVideoContainer);
-//         setTimeout(() => {
-//             lastActiveVideoContainer.style.transition = "transform 1s cubic-bezier(0.165, 0.84, 0.44, 1)";
-//             lastActiveVideoContainer.style.transform = "translateY(0)";
-
-//             setTimeout(() => {
-//                 lastActiveVideoContainer.style.transition = "";
-//                 lastActiveVideoContainer.style.transform = "";
-//             }, 1000);
-//         }, 200);
-//     }, 0);
-// });
+    gsap.to(lastActiveVideoContainer, {
+        y: "-100%",
+        onComplete: () => {
+            videosContainer.appendChild(lastActiveVideoContainer);
+            gsap.to(lastActiveVideoContainer, {
+                duration: 0.8,
+                ease: "ease-in-out-quad", 
+                y: 0, 
+            });
+        }
+    });
+});
 
 
 // Use Flip to animate the change in size of the current video and close video button
